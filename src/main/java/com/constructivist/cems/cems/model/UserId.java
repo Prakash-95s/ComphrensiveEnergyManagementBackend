@@ -1,5 +1,7 @@
 package com.constructivist.cems.cems.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Embeddable;
 import lombok.Data;
 
@@ -12,11 +14,13 @@ import java.util.Objects;
 public class UserId implements Serializable {
     private Long userId;
     private Long foreignKeyId;
-
-    public UserId(Long id, Long foreignKeyId) {
-        this.userId = id;
+    @JsonCreator
+    public UserId(@JsonProperty("userId") Long userId,
+                  @JsonProperty("foreignKeyId") Long foreignKeyId) {
+        this.userId = userId;
         this.foreignKeyId = foreignKeyId;
     }
+
 
     // Constructors, getters, setters, equals, and hashCode
 

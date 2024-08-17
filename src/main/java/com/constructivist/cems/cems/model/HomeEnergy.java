@@ -1,6 +1,8 @@
 package com.constructivist.cems.cems.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -31,7 +33,32 @@ public class HomeEnergy {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "home_id",insertable = false, updatable = false)
     private GridEnergy gridEnergy;
+    @JsonCreator
+    public HomeEnergy(@JsonProperty("homeEnergyId") Long homeEnergyId,
+                      @JsonProperty("homeName") String homeName,
+                      @JsonProperty("energyTypes") String energyTypes,
+                      @JsonProperty("energyConsumption") Double energyConsumption,
+                      @JsonProperty("appliancesTypes") String appliancesTypes,
+                      @JsonProperty("carbonFootprint") double carbonFootprint,
+                      @JsonProperty("energySaved") double energySaved,
+                      @JsonProperty("users") List<User> users,
+                      @JsonProperty("city") City city,
+                      @JsonProperty("gridEnergy") GridEnergy gridEnergy,
+                      @JsonProperty("apartment") boolean apartment) {
+        this.homeEnergyId = homeEnergyId;
+        this.homeName = homeName;
+        this.energyTypes = energyTypes;
+        this.energyConsumption = energyConsumption;
+        this.appliancesTypes = appliancesTypes;
+        this.carbonFootprint = carbonFootprint;
+        this.energySaved = energySaved;
+        this.users = users;
+        this.city = city;
+        this.gridEnergy = gridEnergy;
+        this.isApartment = apartment;
     }
+
+}
 
 
     // Constructors, getters, setters, etc.

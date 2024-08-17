@@ -1,5 +1,7 @@
 package com.constructivist.cems.cems.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
@@ -18,7 +20,27 @@ public class City {
     private String population;
     private String country; // Country where the city is located
 
-    // A ci
+    // A Json constructor
+    @JsonCreator
+    public City(@JsonProperty("cityId") Long cityId,
+                @JsonProperty("name") String name,
+                @JsonProperty("state") String state,
+                @JsonProperty("population") String population,
+                @JsonProperty("country") String country,
+                @JsonProperty("grids") List<GridEnergy> grids,
+                @JsonProperty("users") List<User> users,
+                @JsonProperty("homes") List<HomeEnergy> homes,
+                @JsonProperty("transports") List<Transport> transports) {
+        this.cityId = cityId;
+        this.name = name;
+        this.state = state;
+        this.population = population;
+        this.country = country;
+        this.grids = grids;
+        this.users = users;
+        this.homes = homes;
+        this.transports = transports;
+    }
     // y can have multiple grids
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GridEnergy> grids;

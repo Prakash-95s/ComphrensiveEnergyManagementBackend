@@ -1,5 +1,7 @@
 package com.constructivist.cems.cems.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -34,6 +36,38 @@ public class Transport {
  @JoinColumn(name ="city_id")
  private City city;
 
+ @JsonCreator
+ public Transport(@JsonProperty("vehicleId") Long vehicleId,
+                  @JsonProperty("vehicleType") String vehicleType,
+                  @JsonProperty("energyModelType") String energyModelType,
+                  @JsonProperty("fuelType") String fuelType,
+                  @JsonProperty("fuelConsumption") double fuelConsumption,
+                  @JsonProperty("carbonFootprintData") String carbonFootprintData,
+                  @JsonProperty("vehicleToGridPowerRegeneration") Long vehicleToGridPowerRegeneration,
+                  @JsonProperty("regeneratedEnergy") int regeneratedEnergy,
+                  @JsonProperty("havingV2G") boolean havingV2G,
+                  @JsonProperty("pollutionLevel") double pollutionLevel,
+                  @JsonProperty("pollutionLevelReduction") int pollutionLevelReduction,
+                  @JsonProperty("user") User user,
+                  @JsonProperty("city") City city,
+                  @JsonProperty("electric") boolean electric,
+                  @JsonProperty("publicTransport") boolean publicTransport) {
+  this.vehicleId = vehicleId;
+  this.vehicleType = vehicleType;
+  this.energyModelType = energyModelType;
+  this.fuelType = fuelType;
+  this.fuelConsumption = fuelConsumption;
+  this.carbonFootprintData = carbonFootprintData;
+  this.vehicleToGridPowerRegeneration = vehicleToGridPowerRegeneration;
+  this.regeneratedEnergy = regeneratedEnergy;
+  this.havingV2G = havingV2G;
+  this.pollutionLevel = pollutionLevel;
+  this.pollutionLevelReduction = pollutionLevelReduction;
+  this.user = user;
+  this.city = city;
+  this.isElectric = electric;
+  this.isPublicTransport = publicTransport;
+ }
 
 
  // Getters and Setters

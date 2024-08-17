@@ -1,5 +1,7 @@
 package com.constructivist.cems.cems.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -29,4 +31,28 @@ public class GridEnergy {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id")
     private City city; // Associated city for this grid
+
+    @JsonCreator
+    public GridEnergy(
+            @JsonProperty("gridEnergyId") Long gridEnergyId,
+            @JsonProperty("gridType") String gridType,
+            @JsonProperty("totalEnergyProduced") double totalEnergyProduced,
+            @JsonProperty("energyConsumed") double energyConsumed,
+            @JsonProperty("energySaved") double energySaved,
+            @JsonProperty("energyRegenerated") double energyRegenerated,
+            @JsonProperty("houseSupplyCapacity") int houseSupplyCapacity,
+            @JsonProperty("homes") List<HomeEnergy> homes,
+            @JsonProperty("city") City city,
+            @JsonProperty("smartGrid") boolean smartGrid) {
+        this.gridEnergyId = gridEnergyId;
+        this.gridType = gridType;
+        this.totalEnergyProduced = totalEnergyProduced;
+        this.energyConsumed = energyConsumed;
+        this.energySaved = energySaved;
+        this.energyRegenerated = energyRegenerated;
+        this.houseSupplyCapacity = houseSupplyCapacity;
+        this.homes = homes;
+        this.city = city;
+        this.isSmartGrid = smartGrid;
+    }
 }
